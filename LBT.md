@@ -158,13 +158,15 @@ x86clrtm() {
 
 // offset fpr by TOP
 mappedFPR(fpr) {
-    if (TM) {
-        return FPR[fpr + TOP];
+    if (TM && fpr < 8) {
+        return FPR[(fpr + TOP) % 8];
     } else {
         return FPR[fpr];
     }
 }
 ```
+
+lsx/lasx registers are not remapped.
 
 #### settag
 
